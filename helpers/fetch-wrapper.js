@@ -1,8 +1,20 @@
 import getConfig from 'next/config';
+import {studentService} from "services";
 
 const {publicRuntimeConfig} = getConfig();
 
-export const fetchWrapper = { get, post, put, delete: _delete };
+const authHeader = (url) => {
+    const student = studentService.studentValue;
+    const isLoggedIn = student && student.token;
+    const isApiUrl = url.startsWith(publicRuntimeConfig.apiUrl);
+
+    return isLoggedIn && isApiUrl
+        ? { Authorization: `Bearer ${student.token}` }
+        : {};
+}
+
+const handleResponse = (response) => {
+}
 
 const get = (url) => {
     const requestOptions = {
@@ -39,10 +51,4 @@ const _delete = (url) => {
     return fetch(url, requestOptions).then(handleResponse);
 }
 
-const authHeader = (url) => {
-
-}
-
-const handleResponse = (response) => {
-
-}
+export const fetchWrapper = { get, post, put, delete: _delete };
