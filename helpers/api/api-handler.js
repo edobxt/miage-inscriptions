@@ -1,6 +1,6 @@
 import {errorHandler, jwtMiddleware} from "helpers/api";
 
-const apiHandler = (handler) => {
+export const apiHandler = (handler) => {
     return async (req, res) => {
         try {
             // global middleware
