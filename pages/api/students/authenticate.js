@@ -1,14 +1,40 @@
 const jwt = require('jsonwebtoken');
 import getConfig from "next/config";
-
+import executeQuery from "lib/db";
 import { apiHandler } from 'helpers/api';
 
 const { serverRuntimeConfig } = getConfig();
 
 const handler = (req, res) => {
 
-    const authenticate = () => {
-        const { email, password } = req.body;
+    const authenticate = async () => {
+        try {
+            const result = await executeQuery({
+                query: "select * from students where email = ? and password = ?",
+                values: [req.body.email, req.body.password]
+            });
+
+            console.log(result);
+
+            if (result[0]) {
+                const token = jwt.sign(
+                    {sub: result[0].id},
+                    serverRuntimeConfig.secret,
+                    {expiresIn: '7d'}
+                )
+
+                res.status(200).json({
+                    full_name: result[0].full_name,
+                    token
+                });
+            }
+
+            if (!result[0]) {
+                res.status(200).end(`Not found`);
+            }
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     switch (req.method) {

@@ -5,10 +5,10 @@ import getConfig from 'next/config';
 const {serverRuntimeConfig} = getConfig();
 
 const jwtMiddleware = (req, res) => {
-    const middleware = expressJwt({secret: serverRuntimeConfig.secret, algorithms: ['HS256']}).unless({
+    const middleware = expressJwt.expressjwt({ secret: serverRuntimeConfig.secret, algorithms: ['HS256'] }).unless({
         path: [
             // public routes that don't require authentication
-            '/api/users/authenticate'
+            '/api/students/authenticate'
         ]
     });
 
