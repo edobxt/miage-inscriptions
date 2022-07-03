@@ -27,6 +27,7 @@ export default async function handler(req, res)
                 console.log(error);
             }
             break;
+
         default:
             return res.status(405).end('Method ${req.method} NotAllowed')
     }
