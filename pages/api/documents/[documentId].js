@@ -2,12 +2,15 @@ import executeQuery from "../../../lib/db";
 
 //Liste des documents de l'étudiant
 export default async function handler(req, res) {
+
+    const {documentId} = req.query;
+
     switch (req.method) {
         case "GET":
             try {
                 const result = await executeQuery({
                     query: "select * from documents where id = ?",
-                    values: req.body.id
+                    values: [documentId]
                 })
                 res.status(200).json(result);
             } catch (error) {
@@ -19,7 +22,7 @@ export default async function handler(req, res) {
             try {
                 const result = await executeQuery({
                     query: "update documents set name = ?, active = ? where id = ?",
-                    values: [req.body.name, req.body.active, req.body.id]
+                    values: [req.body.name, req.body.active, documentId]
                 })
                 res.status(200).json(result);
             } catch (error) {
@@ -31,7 +34,7 @@ export default async function handler(req, res) {
             try {
                 const result = await executeQuery({
                     query: "delete from documents where id = ?",
-                    values: req.body.id
+                    values: [documentId]
                 })
                 res.status(200).json(result);
             } catch (error) {
