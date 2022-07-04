@@ -15,7 +15,7 @@ const authHeader = (url) => {
 
 const handleResponse = (response) => {
     return response.text().then(text => {
-        const data = text && JSON.parse(text);
+        const data = JSON.parse(text);
 
         if (!response.ok) {
             if ([401, 403].includes(response.status) && studentService.studentValue) {

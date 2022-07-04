@@ -14,7 +14,9 @@ const handler = (req, res) => {
                 values: [req.body.email, req.body.password]
             });
 
-            console.log(result);
+            if (!result[0]) {
+                res.status(403).json(`Access denied`)
+            }
 
             if (result[0]) {
                 const token = jwt.sign(
@@ -24,14 +26,13 @@ const handler = (req, res) => {
                 )
 
                 res.status(200).json({
+                    ok: "OK",
+                    id: result[0].id,
                     full_name: result[0].full_name,
                     token
                 });
             }
 
-            if (!result[0]) {
-                res.status(200).end(`Not found`);
-            }
         } catch (error) {
             console.log(error)
         }

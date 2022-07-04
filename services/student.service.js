@@ -3,11 +3,13 @@ import getConfig from "next/config";
 import Router from 'next/router'
 
 import {fetchWrapper} from "helpers";
-import {retry} from "rxjs/src/internal/operators/retry";
 
 const {publicRuntimeConfig} = getConfig();
 const baseUrl = `${publicRuntimeConfig.apiUrl}/students`;
-const studentSubject = new BehaviorSubject(typeof window && JSON.parse(localStorage.getItem('student')));
+
+const studentSubject = typeof window !== 'undefined'
+    ? new BehaviorSubject(JSON.parse(localStorage.getItem('student')))
+    : null;
 
 const login = (email, password) => {
     return fetchWrapper.post(`${baseUrl}/authenticate`, {
@@ -31,10 +33,16 @@ const getAll = () => {
     return fetchWrapper.get(baseUrl);
 }
 
-export const studentService = {
-    student: studentSubject.asObservable(),
-    get studentValue () { return studentSubject.value },
-    login,
-    logout,
-    getAll
-};
+export const studentService = typeof window !== 'undefined'
+    ? {
+        student: studentSubject.asObservable(),
+        get studentValue () { return studentSubject.value },
+        login,
+        logout,
+        getAll
+    }
+    : {
+        login,
+        logout,
+        getAll
+    }
