@@ -1,7 +1,7 @@
 import executeQuery from "lib/db";
 
 export default async function handler(req, res) {
-    const {formId} = req.query;
+    const {degreesId} = req.query;
 
     switch (req.method) {
         case "GET":
