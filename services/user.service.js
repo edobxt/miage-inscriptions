@@ -15,7 +15,6 @@ const login = (email, password, target) => {
     return fetchWrapper.post(`${baseUrl}/${target}/authenticate`, {
         email, password
     }).then(user => {
-        console.log("test")
         userSubject.next(user);
         localStorage.setItem('miage_user', JSON.stringify(user));
 
