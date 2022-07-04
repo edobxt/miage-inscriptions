@@ -14,6 +14,8 @@ const handler = (req, res) => {
                 values: [req.body.email, req.body.password]
             });
 
+            console.log(result);
+
             if (!result[0]) {
                 res.status(403).json(`Access denied`)
             }

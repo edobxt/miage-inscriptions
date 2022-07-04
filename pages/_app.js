@@ -5,8 +5,7 @@ import {useState, useEffect} from "react";
 import {useRouter} from 'next/router';
 import "antd/dist/antd.css";
 
-import {studentService} from "services";
-import {set} from "react-hook-form";
+import {userService} from "services";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
@@ -16,11 +15,10 @@ function MyApp({ Component, pageProps }) {
       const publicPaths = ['/login'];
       const path = url.split('?')[0];
 
-      if (!studentService.studentValue && !publicPaths.includes(path)) {
+      if (!userService.userValue && !publicPaths.includes(path)) {
         setAuthorized(false);
         router.push({
-          pathname: '/login',
-          query: {returnUrl: router.asPath}
+          pathname: '/login'
         });
       }
       else {

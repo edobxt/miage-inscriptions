@@ -1,5 +1,5 @@
 import styles from '../styles/Home.module.css'
-import {studentService} from "services";
+import {userService} from "services";
 import {Button} from "antd";
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
     <>
       <Button
           type={"primary"}
-          onClick={() => studentService.logout()}
+          onClick={() => userService.logout()}
       >
         Logout
       </Button>
