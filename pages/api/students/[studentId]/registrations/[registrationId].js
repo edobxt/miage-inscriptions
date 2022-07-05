@@ -1,6 +1,6 @@
-import executeQuery from "../../../lib/db";
+import executeQuery from "lib/db";
 
-//Information sur une inscription de l'étudiant
+
 export default async function handler(req, res)
 {
     const {studentId, registrationId} = req.query;

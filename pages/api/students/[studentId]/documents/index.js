@@ -1,6 +1,6 @@
-import executeQuery from "../../../lib/db";
+import executeQuery from "lib/db";
 
-//Liste des documents de l'étudiant
+
 export default async function handler(req, res)
 {
     const {studentId} = req.query;
@@ -22,7 +22,7 @@ export default async function handler(req, res)
             try {
                 const result = await executeQuery({
                     query: "insert into students_documents(student_id, document_id, date_added) values (?,?,NOW())",
-                    values : [req.body.student_id, req.body.document_id, req.body.date_added]
+                    values : [studentId, req.body.document_id]
                 })
                 res.status(200).json(result);
             } catch (error) {
