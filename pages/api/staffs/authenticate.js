@@ -10,7 +10,7 @@ const handler = (req, res) => {
     const authenticate = async () => {
         try {
             const result = await executeQuery({
-                query: "select * from students where email = ? and password = ?",
+                query: "select * from staff where email = ? and password = ?",
                 values: [req.body.email, req.body.password]
             });
 
@@ -31,6 +31,7 @@ const handler = (req, res) => {
                     ok: "OK",
                     id: result[0].id,
                     full_name: result[0].full_name,
+                    email: result[0].email,
                     token
                 });
             }
