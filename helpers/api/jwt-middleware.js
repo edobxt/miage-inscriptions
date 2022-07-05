@@ -5,15 +5,19 @@ import getConfig from 'next/config';
 const {serverRuntimeConfig} = getConfig();
 
 const jwtMiddleware = (req, res) => {
-    const middleware = expressJwt.expressjwt({ secret: serverRuntimeConfig.secret, algorithms: ['HS256'] }).unless({
+    const middleware = expressJwt.expressjwt({
+        secret: serverRuntimeConfig.secret,
+        algorithms: ['HS256'] })
+    .unless({
         path: [
             // public routes that don't require authentication
             '/api/students/authenticate',
             '/api/staffs/authenticate',
-            '/api/tutors/authenticate'
+            '/api/tutors/authenticate',
+            '/api/students/signup',
+            '/api/tutors/signup'
         ]
     });
-
     return util.promisify(middleware)(req, res);
 }
 

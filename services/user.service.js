@@ -11,9 +11,19 @@ const userSubject = typeof window !== 'undefined'
     : null;
 
 const login = (email, password, target) => {
-    console.log(`${baseUrl}/${target}/authenticate`)
     return fetchWrapper.post(`${baseUrl}/${target}/authenticate`, {
         email, password
+    }).then(user => {
+        userSubject.next(user);
+        localStorage.setItem('miage_user', JSON.stringify(user));
+
+        return user;
+    })
+}
+
+const signup = (fullName, email, password, verifyPassword, target) => {
+    return fetchWrapper.post(`${baseUrl}/${target}/signup`, {
+        fullName, email, password, verifyPassword
     }).then(user => {
         userSubject.next(user);
         localStorage.setItem('miage_user', JSON.stringify(user));
@@ -25,7 +35,6 @@ const login = (email, password, target) => {
 const logout = () => {
     localStorage.removeItem('miage_user');
     userSubject.next(null);
-    console.log("logout")
     Router.push('/login');
 }
 
@@ -33,9 +42,10 @@ export const userService = typeof window !== 'undefined'
     ? {
         user: userSubject.asObservable(),
         get userValue () { return userSubject.value },
-        login, logout
+        login, logout, signup
     }
     : {
         login,
-        logout
+        logout,
+        signup
     }

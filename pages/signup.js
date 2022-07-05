@@ -2,10 +2,13 @@ import styles from "styles/Signup.module.css";
 
 import {Tabs} from "antd";
 import Link from "next/link";
+import {userService} from "services";
 import {useState} from "react";
+import {useRouter} from "next/router";
 const {TabPane} = Tabs;
 
 export default function Signup() {
+    const router = useRouter();
     const [fullName, setFullName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -13,7 +16,15 @@ export default function Signup() {
     const [target, setTarget] = useState('students');
 
     const onSubmit = () => {
-        console.log(fullName, email, password, verifyPassword, target);
+        userService.signup(fullName, email, password, verifyPassword, target)
+            .then(() => {
+                const returnUrl = router.query.returnUrl || '/';
+                router.push(returnUrl);
+            })
+    }
+
+    const onChange = (key) => {
+        setTarget(key);
     }
 
     let inputClassName = "shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline";
@@ -25,7 +36,7 @@ export default function Signup() {
                 <div className={styles.login_form}>
                     <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                         <h3>Se connecter en tant que :</h3>
-                        <Tabs defaultActiveKey={"students"}>
+                        <Tabs defaultActiveKey={"students"} onChange={onChange}>
                             <TabPane tab={"Étudiant"} key={"students"}></TabPane>
                             <TabPane tab={"Maître d'apprentissage"} key={"tutors"} disabled></TabPane>
                         </Tabs>
