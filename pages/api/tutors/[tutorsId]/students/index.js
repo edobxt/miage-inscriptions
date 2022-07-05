@@ -6,7 +6,7 @@ export default async function handler(req, res) {
         case 'GET':
             try {
                 const result = await executeQuery({
-                    query: "SELECT students.id, students.full_name FROM tutors inner join tutors_to_registrations on tutors.id = tutors_to_registrations.tutor_id inner join registrations on tutors_to_registrations.registration_id = registrations.id inner join students on registrations.students_id = students.id WHERE tutors_to_registrations.tutor_id = ?",
+                    query: "SELECT students.id, students.full_name FROM students inner join tutors_to_registrations on students.id = tutors_to_registrations.tutor_id inner join registrations on tutors_to_registrations.registration_id = registrations.id  WHERE tutors_to_registrations.tutor_id = ?",
                     values: [tutorsId]
                 })
                 res.status(200).json(result);
