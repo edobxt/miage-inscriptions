@@ -4,15 +4,16 @@ import Head from 'next/head';
 import {useState, useEffect} from "react";
 import {useRouter} from 'next/router';
 import "antd/dist/antd.css";
+import {Nav} from "../components/Nav";
 
 import {userService} from "services";
 
 function MyApp({ Component, pageProps }) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
+  const publicPaths = ['/login', '/signup'];
 
   const authCheck = (url) => {
-      const publicPaths = ['/login', '/signup'];
       const path = url.split('?')[0];
 
       if (!userService.userValue && !publicPaths.includes(path)) {
@@ -43,6 +44,25 @@ function MyApp({ Component, pageProps }) {
     }
   }, [])
 
+    const menus = [
+        {
+            name: "Liste des étudiants",
+            path: "/students"
+        },
+        {
+            name: "Liste des inscriptions",
+            path: "/registrations"
+        },
+        {
+            name: "Liste des promotions",
+            path: "/promotions"
+        },
+        {
+            name: "Gestion des formulaires",
+            path: "/forms"
+        },
+    ]
+
   return (
       <>
           <Head>
@@ -51,7 +71,15 @@ function MyApp({ Component, pageProps }) {
               <link rel="icon" href="/favicon.ico" />
           </Head>
           {
-              authorized && <Component {...pageProps} />
+              authorized && !publicPaths.includes(router.asPath) && (
+                  <div className={"flex"}>
+                      <Nav data={menus} />
+                      <Component {...pageProps} />
+                  </div>
+              )
+          }
+          {
+              publicPaths.includes(router.asPath) && <Component {...pageProps} />
           }
       </>
   )
