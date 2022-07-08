@@ -7,6 +7,11 @@ import {useState} from "react";
 import {useRouter} from "next/router";
 const {TabPane} = Tabs;
 
+import Image from "next/image"
+import greta from "../public/greta-logo.png";
+import miage from "../public/miage-logo.png";
+import ua from "../public/ua-logo.png";
+
 export default function Signup() {
     const router = useRouter();
     const [fullName, setFullName] = useState('');
@@ -31,7 +36,11 @@ export default function Signup() {
 
     return (
         <div className={styles.main}>
-            <div className={styles.images_side}></div>
+            <div className={styles.images_side}>
+                <div className={styles.nb1}><Image alt={"Logo Université"} src={ua} /></div>
+                <div className={styles.nb2}><Image alt={"Logo Miage"} src={miage} /></div>
+                <div className={styles.nb3}><Image alt={"Logo Greta"} src={greta} /></div>
+            </div>
             <div className={styles.form_side}>
                 <div className={styles.login_form}>
                     <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -72,9 +81,9 @@ export default function Signup() {
                                 className={inputClassName}
                                 id="confirm_password" type="password" placeholder="******************" required={true} onChange={e => setVerifyPassword(e.target.value)} />
                         </div>
-                        <div className="flex items-center justify-between">
+                        <div className={styles.login_buttons}>
                             <button
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                className="bg-blue-500 hover:bg-blue-700 mb-5 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 type="submit" style={{backgroundColor: "#2D8B94"}} onClick={onSubmit}>
                                 S&apos;inscrire
                             </button>
