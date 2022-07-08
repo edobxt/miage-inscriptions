@@ -3,6 +3,10 @@ import {useEffect, useState} from "react";
 import {userService} from "services";
 import styles from "styles/Login.module.css";
 import Link from "next/link";
+import Image from "next/image"
+import greta from "../public/greta-logo.png";
+import miage from "../public/miage-logo.png";
+import ua from "../public/ua-logo.png";
 
 import {Tabs} from "antd";
 const {TabPane} = Tabs;
@@ -41,7 +45,11 @@ export default function Login() {
 
     return (
         <div className={styles.main}>
-            <div className={styles.images_side}></div>
+            <div className={styles.images_side}>
+                <div className={styles.nb1}><Image alt={"Logo Université"} src={ua} /></div>
+                <div className={styles.nb2}><Image alt={"Logo Miage"} src={miage} /></div>
+                <div className={styles.nb3}><Image alt={"Logo Greta"} src={greta} /></div>
+            </div>
             <div className={styles.form_side}>
                 <div className={styles.login_form}>
                     <div className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
@@ -70,9 +78,9 @@ export default function Login() {
                         {
                             error && <p className="text-red-500 text-xs italic">Email ou mot de passe incorrect</p>
                         }
-                        <div className="flex items-center justify-between">
+                        <div className={styles.login_buttons}>
                             <button
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold mb-5 py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                 type="submit" style={{backgroundColor: "#2D8B94"}} onClick={onSubmit}>
                                 Se connecter
                             </button>
