@@ -32,6 +32,7 @@ const handler = (req, res) => {
                     id: result[0].id,
                     full_name: result[0].full_name,
                     email: result[0].email,
+                    type: "staff",
                     token
                 });
             }
