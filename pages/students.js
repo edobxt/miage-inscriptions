@@ -15,7 +15,7 @@ export default function StudentsPage() {
             title: 'Full Name',
             dataIndex: 'full_name',
             key: 'full_name',
-            sorter: (a, b) => a.full_name - b.full_name,
+            sorter: (a, b) => a.full_name.localeCompare(b.full_name),
         },
         {
             title: 'Email',
@@ -51,12 +51,6 @@ export default function StudentsPage() {
             title: 'Date last degree',
             dataIndex: 'last_degree_date',
             key: 'last_degree_date'
-        },
-        {
-            title: 'Age',
-            dataIndex: 'age',
-            key: 'age',
-            sorter: (a, b) => a.age - b.age,
         },
 
         /*filters: [
