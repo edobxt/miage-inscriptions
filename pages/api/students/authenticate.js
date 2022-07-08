@@ -23,7 +23,6 @@ const handler = (req, res) => {
 
             hasher.isSamePass(req.body.password, result[0].password)
                 .then(isSamePass => {
-                    console.log(isSamePass)
                     if (result[0] && isSamePass) {
                         const token = jwt.sign(
                             {sub: result[0].id},

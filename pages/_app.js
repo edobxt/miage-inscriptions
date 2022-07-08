@@ -82,6 +82,10 @@ function MyApp({ Component, pageProps }) {
                         name: "Gestion des formulaires",
                         path: "/forms"
                     },
+                    {
+                        name: "Gestion du staff",
+                        path: "/staffs"
+                    },
                 ]
             break;
         }
