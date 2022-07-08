@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.9.3",
     "antd": "^4.21.4",
+    "axios": "^0.27.2",
     "express-jwt": "^7.7.5",
     "jsonwebtoken": "^8.5.1",
     "next": "12.1.6",
