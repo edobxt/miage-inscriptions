@@ -1,0 +1,80 @@
+.Nav {
+    background-color: #002898;
+    color: #FEFEFE;
+    height: 100%;
+    width: 20%;
+    position: relative;
+}
+
+.logo_miage {
+    width: 60%;
+    margin: 50px auto;
+}
+
+.logout {
+    height: 5%;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    border-top: 2px solid #FEFEFE;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+
+.logout > span {
+    cursor: pointer;
+}
+
+.logout > span:hover {
+    text-decoration: underline;
+}
+
+.menus {
+    text-align: center;
+}
+
+.menus_item {
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 30px;
+}
+
+.menus_item > a {
+    font-size: 1.2em;
+    color: #FEFEFE;
+}
+
+.menus_item > a:hover {
+
+    text-decoration: underline;
+}
+
+.NavMobile {
+    display: none;
+}
+
+@media screen and (max-width: 900px){
+    .Nav {
+        display: none;
+    }
+
+    .NavMobile {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        position: fixed;
+        bottom: 0;
+
+        height: 9%;
+        width: 100%;
+
+        background-color: #002898;
+        color: #FEFEFE;
+
+        padding: 5px;
+
+        font-size: 2rem;
+    }
+}
