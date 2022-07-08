@@ -4,7 +4,7 @@ import Head from 'next/head';
 import {useState, useEffect} from "react";
 import {useRouter} from 'next/router';
 import "antd/dist/antd.css";
-import {Nav} from "../components/Nav";
+import {Nav} from "@/components/Nav";
 
 import {userService} from "services";
 
@@ -44,24 +44,53 @@ function MyApp({ Component, pageProps }) {
     }
   }, [])
 
-    const menus = [
-        {
-            name: "Liste des étudiants",
-            path: "/students"
-        },
-        {
-            name: "Liste des inscriptions",
-            path: "/registrations"
-        },
-        {
-            name: "Liste des promotions",
-            path: "/promotions"
-        },
-        {
-            name: "Gestion des formulaires",
-            path: "/forms"
-        },
-    ]
+    let menus = [];
+
+    if (userService.userValue) {
+        switch (userService.userValue.type) {
+            case "student":
+                menus = [
+                    {
+                        name: "Mes inscriptions",
+                        path: "/registrations"
+                    },
+                    {
+                        name: "Mes documents",
+                        path: "/documents"
+                    },
+                    {
+                        name: "Mes informations",
+                        path: "/user-infos"
+                    },
+                ]
+            break;
+            case "staff":
+                menus = [
+                    {
+                        name: "Liste des étudiants",
+                        path: "/students"
+                    },
+                    {
+                        name: "Liste des inscriptions",
+                        path: "/registrations"
+                    },
+                    {
+                        name: "Liste des promotions",
+                        path: "/promotions"
+                    },
+                    {
+                        name: "Gestion des formulaires",
+                        path: "/forms"
+                    },
+                    {
+                        name: "Gestion du staff",
+                        path: "/staffs"
+                    },
+                ]
+            break;
+        }
+
+    }
 
   return (
       <>
