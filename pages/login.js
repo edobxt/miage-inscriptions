@@ -25,7 +25,6 @@ export default function Login() {
     }, []);
 
     const onSubmit = () => {
-        console.log(email, password)
         userService.login(email, password, target)
             .then(() => {
                 const returnUrl = router.query.returnUrl || '/';
