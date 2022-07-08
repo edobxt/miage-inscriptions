@@ -1,6 +1,6 @@
-import executeQuery from "../../../lib/db";
+import executeQuery from "lib/db";
 
-//Liste des documents de l'étudiant
+
 export default async function handler(req, res) {
 
     const {studentId, documentId} = req.query;
